@@ -1,0 +1,132 @@
+---
+title: "A Deep Dive into Colombian Demographics Using ColOpenData"
+output: 
+  rmarkdown::html_vignette:
+    df_print: tibble
+vignette: >
+  %\VignetteIndexEntry{A Deep Dive into Colombian Demographics Using ColOpenData}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+::: {style="text-align: justify;"}
+**ColOpenData** can be used to access open demographic data from Colombia. This demographic data is retrieved from the National Administrative Department of Statistics (DANE). The demographic module allows you to consult demographic data from the National Population and Dwelling Census (CNPV) of 2018 and Population Projections.
+
+The available CNPV information is divided in four categories: households, persons demographic, persons social and dwellings. The population projections information presents data from 1950 to 2070 for a national level, from 1985 to 2050 for a departmental level and from 1985 to 2035 for a municipal level. All data documentation can be accessed as explained at [Documentation and Dictionaries](https://epiverse-trace.github.io/ColOpenData/articles/documentation_and_dictionaries.html).
+
+In this vignette you will learn:
+
+1.  How to download demographic data using **ColOpenData**.
+2.  How to filter, group, mutate and aggregate demographic data.
+3.  How to visualize data using **ggplot2**.
+
+As the goal of this vignette is to show some examples on how to use the data, we will load some specific libraries but that does not mean they are required to use the data in all cases.
+
+In order to access its documentation we need to use the function `list_datasets()` and indicate as a parameter the module we are interested in. It is important to take a good look at this to have a clearer understanding of what we count with, before just throwing ourselves to work with the data. Now, we should start by loading all necessary libraries.
+:::
+
+```{r libraries, message=FALSE, warning=FALSE, results="hide"}
+library(ColOpenData)
+library(dplyr)
+library(ggplot2)
+```
+
+::: {style="text-align: justify;"}
+**Disclaimer: all data is loaded to the environment in the user's R session, but is not downloaded to user's computer.**
+:::
+
+## Initial Exploration: Basic Data Handling with ColOpenData
+
+### Documentation access
+
+::: {style="text-align: justify;"}
+First, we have to access the demographic documentation, to check available datasets.
+:::
+
+```{r documentation, echo =TRUE}
+datasets_dem <- list_datasets(module = "demographic", language = "EN")
+
+head(datasets_dem)
+```
+
+::: {style="text-align: justify;"}
+After checking the documentation, we can load the data we want to work with. To do this, we will use the `download_demographic()` function that takes by parameter the dataset name, presented in the documentation. For this first example we will focus on a CNPV dataset.
+:::
+
+### Data load
+
+```{r data load, echo=TRUE}
+public_services_d <- download_demographic(dataset = "DANE_CNPVV_2018_8VD")
+
+head(public_services_d)
+```
+
+::: {style="text-align: justify;"}
+As it can be seen above, [public_services_d]{.underline} presents information regarding availability of public services in the country at the department level. Now, with this data we could, for example, find the proportion of dwellings that have access to a water supply system (WSS) by department and plot it.
+:::
+
+### Data filter and plot
+
+First we will subset the data so it presents the information regarding the WSS by department.
+
+```{r wss}
+wss <- public_services_d %>%
+  filter(
+    area == "total_departamental",
+    servicio_publico == "acueducto"
+  ) %>%
+  select(departamento, disponible, total)
+```
+
+With the subset, we can calculate the total counts by department.
+
+```{r counts wss}
+total_counts <- wss %>%
+  group_by(departamento) %>%
+  summarise(total_all = sum(total)) %>%
+  ungroup()
+```
+
+Then, we can calculate the proportions of "yes" ("si") by department.
+
+```{r proportions wss}
+proportions_wss <- wss %>%
+  filter(disponible == "si") %>%
+  left_join(total_counts, by = "departamento") %>%
+  mutate(proportion_si = total / total_all)
+```
+
+For plotting purposes, we will change the name of "San Andrés", since the complete name is too long.
+
+```{r san andres}
+proportions_wss[28, "departamento"] <- "SAPSC"
+```
+
+Finally, we can plot the results
+
+```{r plot wss}
+ggplot(proportions_wss, aes(
+  x = reorder(departamento, -proportion_si),
+  y = proportion_si
+)) +
+  geom_bar(stat = "identity", fill = "#10bed2", color = "black", width = 0.6) +
+  labs(
+    title = "Proportion of dwellings with access to WSS by department",
+    x = "Department",
+    y = "Proportion"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.background = element_rect(fill = "white", colour = "white"),
+    panel.background = element_rect(fill = "white", colour = "white"),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    plot.title = element_text(hjust = 0.5)
+  )
+```

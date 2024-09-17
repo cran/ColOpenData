@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Documentation and Dictionaries</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Documentation and Dictionaries</h1>
+
+
+
+<div id="naming-and-structure" class="section level2">
+<h2>Naming and structure</h2>
+<div id="understanding-demographic-datasets" class="section level4">
+<h4>Understanding Demographic Datasets</h4>
+<div style="text-align: justify;">
+<p>Demographic data is provided from multiple datasets of the same
+source. To download the data, a naming framework has been implemented,
+which includes the source, group, year and final details for individual
+identification. Details are different for every dataset and are related
+to the internal information they contain. The general frame can be used
+as follows:</p>
+</div>
+<div class="alert alert-info">
+<p>SOURCE_GROUP_YEARS_DETAILS</p>
+</div>
+<div style="text-align: justify;">
+<p>Demographic datasets are available for municipalities and
+departments, and contain data for Dwellings, Households, Population and
+Population Projections in five categories.</p>
+<ul>
+<li>Viviendas (Dwellings).</li>
+<li>Hogares (Households).</li>
+<li>Personas Social (Persons Social).</li>
+<li>Personas Demográfico (Persons Demographic).</li>
+</ul>
+<p>All datasets are retrieved from the National Administrative
+Department of Statistics (DANE). Naming is stated as follows:</p>
+<ul>
+<li>Source: <strong>DANE</strong>.</li>
+<li>Group: Names include the categories.
+<ul>
+<li>Viviendas: <strong>CNPVV</strong>.</li>
+<li>Hogares: <strong>CNPVH</strong>.</li>
+<li>Personas Social: <strong>CNPVPS</strong>.</li>
+<li>Personas Demográfico: <strong>CNPVPD</strong>.</li>
+</ul></li>
+<li>Year:
+<ul>
+<li>Census data: <strong>2018</strong></li>
+</ul></li>
+<li>Details: These are related to each individual dataset. For further
+details please check the function <code>list_datasets()</code>
+below.</li>
+</ul>
+</div>
+<div style="text-align: justify;">
+<p>For hands on examples please check <a href="https://epiverse-trace.github.io/ColOpenData/articles/demographic_data.html">A
+Deep Dive into Colombian Demographics Using ColOpenData</a>.</p>
+</div>
+</div>
+<div id="understanding-geospatial-datasets" class="section level4">
+<h4>Understanding Geospatial Datasets</h4>
+<div style="text-align: justify;">
+<p>Geospatial datasets naming is related to the level of aggregation,
+since they are available from Blocks to Departments. All these datasets
+come from DANE, and are part of the National Geostatistical Framework
+(MGN), which for 2018 included a summarized version of the National
+Population and Dwelling Census (CNPV). Available spatial levels include:
+department, municipality, urban and rural sector, urban and rural
+section, urban zone and blocks. Please check <a href="https://epiverse-trace.github.io/ColOpenData/articles/geospatial_data.html">Maps
+and plots with ColOpenData</a> for further details.</p>
+</div>
+</div>
+</div>
+<div id="understanding-climate-dataset" class="section level2">
+<h2>Understanding Climate Dataset</h2>
+<div style="text-align: justify;">
+<p>This module’s data is stored in an unique dataset, and the
+information required to use the related functions is the area of
+interest, dates, and tags be consulted. Individual tags are required to
+download data and include:</p>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Tags</th>
+<th align="left">Variable</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">TSSM_CON</td>
+<td align="left">Dry-bulb Temperature</td>
+</tr>
+<tr class="even">
+<td align="left">THSM_CON</td>
+<td align="left">Wet-bulb Temperature</td>
+</tr>
+<tr class="odd">
+<td align="left">TMN_CON</td>
+<td align="left">Minimum Temperature</td>
+</tr>
+<tr class="even">
+<td align="left">TMX_CON</td>
+<td align="left">Maximum Temperature</td>
+</tr>
+<tr class="odd">
+<td align="left">TSTG_CON</td>
+<td align="left">Dry-bulb Temperature (Termograph)</td>
+</tr>
+<tr class="even">
+<td align="left">HR_CAL</td>
+<td align="left">Relative Humidity</td>
+</tr>
+<tr class="odd">
+<td align="left">HRHG_CON</td>
+<td align="left">Relative Humidity (Hydrograph)</td>
+</tr>
+<tr class="even">
+<td align="left">TV_CAL</td>
+<td align="left">Vapour Pressure</td>
+</tr>
+<tr class="odd">
+<td align="left">TPR_CAL</td>
+<td align="left">Dew Point</td>
+</tr>
+<tr class="even">
+<td align="left">PTPM_CON</td>
+<td align="left">Precipitation (Daily)</td>
+</tr>
+<tr class="odd">
+<td align="left">PTPG_CON</td>
+<td align="left">Precipitation (Hourly)</td>
+</tr>
+<tr class="even">
+<td align="left">EVTE_CON</td>
+<td align="left">Evaporation</td>
+</tr>
+<tr class="odd">
+<td align="left">FA_CON</td>
+<td align="left">Atmospheric Phenomenon</td>
+</tr>
+<tr class="even">
+<td align="left">NB_CON</td>
+<td align="left">Cloudiness</td>
+</tr>
+<tr class="odd">
+<td align="left">RCAM_CON</td>
+<td align="left">Wind Trajectory</td>
+</tr>
+<tr class="even">
+<td align="left">BSHG_CON</td>
+<td align="left">Sunshine Duration</td>
+</tr>
+<tr class="odd">
+<td align="left">VVAG_CON</td>
+<td align="left">Wind Speed</td>
+</tr>
+<tr class="even">
+<td align="left">DVAG_CON</td>
+<td align="left">Wind Direction</td>
+</tr>
+<tr class="odd">
+<td align="left">VVMXAG_CON</td>
+<td align="left">Maximum Wind Speed</td>
+</tr>
+<tr class="even">
+<td align="left">DVMXAG_CON</td>
+<td align="left">Maximum Wind Direction</td>
+</tr>
+</tbody>
+</table>
+<div style="text-align: justify;">
+<p>These tags are meant to be used for download using
+<code>download_climate()</code>, <code>download_climate_geom()</code>
+and <code>download_climate_stations()</code>. See <a href="https://epiverse-trace.github.io/ColOpenData/articles/climate_data.html">How
+to download climate data using ColOpenData</a> for further details.</p>
+</div>
+</div>
+<div id="understanding-population-projections" class="section level2">
+<h2>Understanding Population Projections</h2>
+<div style="text-align: justify;">
+<p>Population projections and back-projections are available for
+national, department and municipality levels, and divided by sex and
+ethnicity (the latter is only available for municipalities). The names
+of the datasets relate to the source, years included, sex and
+ethnicity.</p>
+<p>For examples on how to consult the data please refer to <a href="https://epiverse-trace.github.io/ColOpenData/articles/population_projections.html">Population
+Projection with ColOpenData</a></p>
+</div>
+</div>
+<div id="list-data" class="section level2">
+<h2>List Data</h2>
+<div style="text-align: justify;">
+<p>To check available datasets you can use the
+<code>list_datasets()</code> function. The associated information can be
+filtered with the <code>module</code> parameter to indicate a specific
+module. Default is <code>&quot;all&quot;</code>, but can be filtered by
+<code>&quot;demographic&quot;</code>, <code>&quot;geospatial&quot;</code>,
+<code>&quot;climate&quot;</code> and <code>&quot;population_projections&quot;</code>. This
+function can also be presented both in English (EN) and Spanish (ES)
+with the <code>language</code> parameter. Default is <code>&quot;ES&quot;</code>,
+but can be <code>&quot;EN&quot;</code> as well.</p>
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(ColOpenData)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>datasets <span class="ot">&lt;-</span> <span class="fu">list_datasets</span>(<span class="at">language =</span> <span class="st">&quot;EN&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">head</span>(datasets)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 7</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt;   name                 group      source year  level        category description</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;      </span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; 1 DANE_MGN_2018_DPTO   geospatial DANE   2018  department   maps     Geographic…</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; 2 DANE_MGN_2018_MPIO   geospatial DANE   2018  municipality maps     Geographic…</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; 3 DANE_MGN_2018_MPIOCL geospatial DANE   2018  municipalit… maps     Geographic…</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; 4 DANE_MGN_2018_SETU   geospatial DANE   2018  urban_sector maps     Geographic…</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; 5 DANE_MGN_2018_SETR   geospatial DANE   2018  rural_sector maps     Geographic…</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; 6 DANE_MGN_2018_SECU   geospatial DANE   2018  urban_secti… maps     Geographic…</span></span></code></pre></div>
+<p>To list only demographic datasets we can use:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>demographic_datasets <span class="ot">&lt;-</span> <span class="fu">list_datasets</span>(<span class="at">module =</span> <span class="st">&quot;demographic&quot;</span>, <span class="at">language =</span> <span class="st">&quot;EN&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">head</span>(demographic_datasets)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 7</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt;   name                group       source year  level        category description</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;               &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;      </span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; 1 DANE_CNPVH_2018_1HD demographic DANE   2018  department   househo… Number of …</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; 2 DANE_CNPVH_2018_1HM demographic DANE   2018  municipality househo… Number of …</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; 3 DANE_CNPVH_2018_2HD demographic DANE   2018  department   househo… Number of …</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt; 4 DANE_CNPVH_2018_2HM demographic DANE   2018  municipality househo… Number of …</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt; 5 DANE_CNPVH_2018_3HD demographic DANE   2018  department   househo… Households…</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt; 6 DANE_CNPVH_2018_3HM demographic DANE   2018  municipality househo… Households…</span></span></code></pre></div>
+<div style="text-align: justify;">
+<p>We highly recommend using <code>View()</code> instead of
+<code>head()</code> in the local environment for a cleaner and easier
+visualization of the information.</p>
+<p>Using this function, we can retrieve all names, source, aggregation
+level and information for individual datasets.</p>
+</div>
+</div>
+<div id="list-data-using-keywords" class="section level2">
+<h2>List Data Using Keywords</h2>
+<div style="text-align: justify;">
+<p>Sometimes, going through each dataset to find specific information
+can be tiring. If you want to look for an specific word or set of words
+within datasets quickly, you can use the <code>look_up()</code>
+function, which takes by parameter:</p>
+<ol style="list-style-type: decimal">
+<li>The word (or words) you are interested in (input as a character or
+vector of characters).</li>
+<li>The module you wish to search within (default is
+<code>&quot;all&quot;</code>).</li>
+<li>The search condition: <code>&quot;and&quot;</code> to find datasets containing
+all specified words, or <code>&quot;or&quot;</code> to find datasets containing
+any of the specified words (default is <code>&quot;or&quot;</code>). If you are
+searching for a single word, you can use either <code>&quot;and&quot;</code>or
+<code>&quot;or&quot;</code> for this parameter.</li>
+<li>The language the keywords would be, can be <code>&quot;EN&quot;</code> or
+<code>&quot;ES&quot;</code> (default is <code>&quot;EN&quot;</code>).</li>
+</ol>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>age_datasets <span class="ot">&lt;-</span> <span class="fu">look_up</span>(<span class="at">keywords =</span> <span class="st">&quot;age&quot;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="fu">head</span>(age_datasets)</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 7</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt;   name                 group       source year  level       category description</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;      </span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; 1 DANE_CNPVH_2018_1HD  demographic DANE   2018  department  househo… Number of …</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; 2 DANE_CNPVH_2018_1HM  demographic DANE   2018  municipali… househo… Number of …</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; 3 DANE_CNPVH_2018_2HD  demographic DANE   2018  department  househo… Number of …</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; 4 DANE_CNPVH_2018_2HM  demographic DANE   2018  municipali… househo… Number of …</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; 5 DANE_CNPVPD_2018_1PD demographic DANE   2018  department  persons… Total cens…</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; 6 DANE_CNPVPD_2018_1PM demographic DANE   2018  municipali… persons… Total cens…</span></span></code></pre></div>
+<p>We can specify a module to make a more narrow and precise search.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>area_sex_datasets <span class="ot">&lt;-</span> <span class="fu">look_up</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="at">keywords =</span> <span class="fu">c</span>(<span class="st">&quot;area&quot;</span>, <span class="st">&quot;sex&quot;</span>),</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="at">module =</span> <span class="st">&quot;demographic&quot;</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  <span class="at">logic =</span> <span class="st">&quot;and&quot;</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="at">language =</span> <span class="st">&quot;EN&quot;</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>)</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="fu">head</span>(area_sex_datasets)</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 7</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co">#&gt;   name                 group       source year  level       category description</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;      </span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co">#&gt; 1 DANE_CNPVPD_2018_1PD demographic DANE   2018  department  persons… Total cens…</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co">#&gt; 2 DANE_CNPVPD_2018_1PM demographic DANE   2018  municipali… persons… Total cens…</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co">#&gt; 3 DANE_CNPVPD_2018_3PD demographic DANE   2018  department  persons… Total cens…</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co">#&gt; 4 DANE_CNPVPD_2018_3PM demographic DANE   2018  municipali… persons… Total cens…</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co">#&gt; 5 DANE_CNPVPD_2018_4PD demographic DANE   2018  department  persons… Census pop…</span></span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co">#&gt; 6 DANE_CNPVPD_2018_4PM demographic DANE   2018  municipali… persons… Census pop…</span></span></code></pre></div>
+</div>
+<div id="geospatial-dictionaries" class="section level2">
+<h2>Geospatial dictionaries</h2>
+<div style="text-align: justify;">
+<p>Datasets inside the geospatial module contain a summarized version of
+the census and a dictionary is needed to understand all aggregated
+variables. These dictionaries contain the necessary metadata to use the
+available information. To retrieve them, we can use the function
+<code>geospatial_dictionary()</code>, using the spatial level and
+language as parameters:</p>
+</div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>dict_mpio <span class="ot">&lt;-</span> <span class="fu">geospatial_dictionary</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="at">spatial_level =</span> <span class="st">&quot;municipality&quot;</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="at">language =</span> <span class="st">&quot;EN&quot;</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="fu">head</span>(dict_mpio)</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 4</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt;   variable                 type         length description                      </span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;                            </span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt; 1 codigo_departamento      Text              2 Department code                  </span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; 2 codigo_municipio_sin_con Text              3 Municipality code                </span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; 3 municipio                Text            250 Municipality name                </span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; 4 codigo_municipio         Text              5 Concatenated municipality code   </span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; 5 version                  Long Integer     NA Year of the geographic informati…</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; 6 area                     Double           NA Municipality area in square mete…</span></span></code></pre></div>
+</div>
+<div id="climate-tags" class="section level2">
+<h2>Climate tags</h2>
+<div style="text-align: justify;">
+<p>Climate data is not stored in multiple datasets but as an unique
+dataset with numerous tags. These tags can also be consulted through the
+function <code>get_climate_tags()</code>, which takes by parameter the
+tags language, that can be <code>&quot;EN&quot;</code> or <code>&quot;ES&quot;</code>
+(default is <code>&quot;ES&quot;</code>).</p>
+</div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>dict_climate <span class="ot">&lt;-</span> <span class="fu">get_climate_tags</span>(<span class="at">language =</span> <span class="st">&quot;EN&quot;</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="fu">head</span>(dict_climate)</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 3</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt;   tag      variable                          frequency                          </span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;                             &lt;chr&gt;                              </span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt; 1 TSSM_CON Dry-bulb Temperature              Hourly (07:00, 13:00, 18:00 and/or…</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#&gt; 2 THSM_CON Wet-bulb Temperature              Hourly (07:00, 13:00, 18:00 and/or…</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt; 3 TMN_CON  Minimum Temperature               Daily                              </span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">#&gt; 4 TMX_CON  Maximum Temperature               Daily                              </span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#&gt; 5 TSTG_CON Dry-bulb Temperature (Termograph) Hourly (24 hours)                  </span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt; 6 HR_CAL   Relative Humidity                 Hourly (07:00, 13:00, 18:00 and/or…</span></span></code></pre></div>
+</div>
+<div id="divipola" class="section level2">
+<h2>DIVIPOLA</h2>
+<div style="text-align: justify;">
+<p>DIVIPOLA codification is a standardized frame for the whole country,
+and contains departments’ and municipalities’ codes. Departments have
+two digits for individual identification, while municipalities have
+five. The five numbers in municipalities’ codes include the department
+where they are located (first two digits) and the number of the
+municipality within the department (last three digits). The codes for
+each municipality and department can be consulted using the
+<code>divipola_table()</code> function.</p>
+</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>divipola <span class="ot">&lt;-</span> <span class="fu">divipola_table</span>()</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">head</span>(divipola)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 5</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#&gt;   codigo_departamento codigo_municipio departamento municipio  tipo     </span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;               &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;    </span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#&gt; 1 05                  05001            Antioquia    Medellín   Municipio</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; 2 05                  05002            Antioquia    Abejorral  Municipio</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">#&gt; 3 05                  05004            Antioquia    Abriaquí   Municipio</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt; 4 05                  05021            Antioquia    Alejandría Municipio</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">#&gt; 5 05                  05030            Antioquia    Amagá      Municipio</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co">#&gt; 6 05                  05031            Antioquia    Amalfi     Municipio</span></span></code></pre></div>
+<div style="text-align: justify;">
+<p>To get the DIVIPOLA code of a municipality or department we can use
+the auxiliary functions <code>divipola_municipality_code()</code> and
+<code>divipola_department_code()</code> in <strong>ColOpenData</strong>.
+To retrieve a department code we only have to include the department’s
+name:</p>
+</div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">name_to_code_dep</span>(<span class="at">department_name =</span> <span class="st">&quot;Guajira&quot;</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co">#&gt; [1] &quot;44&quot;</span></span></code></pre></div>
+<div style="text-align: justify;">
+<p>To retrieve a municipality code we must include the department name
+and the municipality name. This is to consider repetition among
+municipalities’ names across departments.</p>
+</div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">name_to_code_mun</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>  <span class="at">department_name =</span> <span class="st">&quot;Boyacá&quot;</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  <span class="at">municipality_name =</span> <span class="st">&quot;Tunja&quot;</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>)</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt; [1] &quot;15001&quot;</span></span></code></pre></div>
+<div style="text-align: justify;">
+<p>These individual codes can be used to filter information in the
+datasets.</p>
+<p>On the other hand, departments’ and municipalities’ codes can be
+translated to retrieve their official names using
+<code>divipola_municipality_name()</code> and
+<code>divipola_department_name()</code>.</p>
+</div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">code_to_name_mun</span>(<span class="at">municipality_code =</span> <span class="st">&quot;15001&quot;</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Tunja&quot;</span></span></code></pre></div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

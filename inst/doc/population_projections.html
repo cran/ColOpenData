@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Population Projections with ColOpenData</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Population Projections with
+ColOpenData</h1>
+
+
+
+<div style="text-align: justify;">
+<p>We can use <strong>ColOpenData</strong> to retrieve population
+projections and back-projections on multiple levels of spatial
+aggregation, including municipalities, departments and national levels.
+Availability of years depends on spatial levels. These projections
+include differentiation by gender and even ethnic groups; however, the
+latter is only available for municipalities.</p>
+<p>Availability of years by spatial levels goes as follows:</p>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Level</th>
+<th align="left">Years</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">National</td>
+<td align="left">1950 - 2070</td>
+</tr>
+<tr class="even">
+<td align="left">National with sex</td>
+<td align="left">1985 - 2050</td>
+</tr>
+<tr class="odd">
+<td align="left">Department</td>
+<td align="left">1985 - 2050</td>
+</tr>
+<tr class="even">
+<td align="left">Department with Sex</td>
+<td align="left">1985 - 2050</td>
+</tr>
+<tr class="odd">
+<td align="left">Municipality</td>
+<td align="left">1985 - 2035</td>
+</tr>
+<tr class="even">
+<td align="left">Municipality with Sex</td>
+<td align="left">1985 - 2035</td>
+</tr>
+<tr class="odd">
+<td align="left">Municipaity with Sex and Ethnic Groups</td>
+<td align="left">2018 - 2035</td>
+</tr>
+</tbody>
+</table>
+<div style="text-align: justify;">
+<p>For this example, we will present projections and back projections of
+national population by area, sex and age for the period from 1950 to
+2070. We will observe the expected female population under 99 by
+personalized age brackets for 2034.</p>
+</div>
+<p>We will first load the needed libraries.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(ColOpenData)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<p>Now we can download the data. We will use the function
+<code>download_pop_projections()</code>, which has five parameters:</p>
+<ul>
+<li><code>spatial_level</code> character with the spatial level to be
+consulted. Can be either <code>&quot;national&quot;</code>,
+<code>&quot;department&quot;</code> or <code>&quot;municipality&quot;</code>.</li>
+<li><code>start_year</code> numeric with the start year to be
+consulted.</li>
+<li><code>end_year</code> numeric with the end year to be
+consulted.</li>
+<li><code>include_sex</code> logical for including (or not) division by
+sex. Default is <code>FALSE</code>.</li>
+<li><code>include_ethnic</code> logical for including (or not) division
+by ethnic group (only available for <code>&quot;municipality&quot;</code>).
+Default is <code>FALSE</code>.</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>asen <span class="ot">&lt;-</span> <span class="fu">download_pop_projections</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  <span class="at">spatial_level =</span> <span class="st">&quot;national&quot;</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  <span class="at">start_year =</span> <span class="dv">2034</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>  <span class="at">end_year =</span> <span class="dv">2034</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>  <span class="at">include_sex =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>  <span class="at">include_ethnic =</span> <span class="cn">FALSE</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>)</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; Original data is retrieved from the National Administrative Department</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; of Statistics (Departamento Administrativo Nacional de Estadística -</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; DANE).</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; Reformatted by package authors.</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; Stored by Universidad de Los Andes under the Epiverse TRACE iniative.</span></span></code></pre></div>
+<p>We will filter the downloaded data for ages under 99.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>female_2034 <span class="ot">&lt;-</span> asen <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>    area <span class="sc">==</span> <span class="st">&quot;total&quot;</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>    sexo <span class="sc">==</span> <span class="st">&quot;mujer&quot;</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>    edad <span class="sc">!=</span> <span class="st">&quot;100_y_mas&quot;</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">edad =</span> <span class="fu">as.numeric</span>(edad))</span></code></pre></div>
+<p>Age groups will be defined by breaks and included in the original
+dataset.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>age_groups <span class="ot">&lt;-</span> <span class="fu">cut</span>(female_2034[[<span class="st">&quot;edad&quot;</span>]],</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">12</span>, <span class="dv">19</span>, <span class="dv">29</span>, <span class="dv">39</span>, <span class="dv">49</span>, <span class="dv">59</span>, <span class="dv">69</span>, <span class="dv">79</span>, <span class="dv">89</span>, <span class="dv">99</span>),</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    <span class="st">&quot;0-2&quot;</span>, <span class="st">&quot;3-12&quot;</span>, <span class="st">&quot;13-19&quot;</span>, <span class="st">&quot;20-29&quot;</span>, <span class="st">&quot;30-39&quot;</span>, <span class="st">&quot;40-49&quot;</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>    <span class="st">&quot;50-59&quot;</span>, <span class="st">&quot;60-69&quot;</span>, <span class="st">&quot;70-79&quot;</span>, <span class="st">&quot;80-89&quot;</span>, <span class="st">&quot;90-99&quot;</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>  )</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>)</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>female_groups <span class="ot">&lt;-</span> female_2034 <span class="sc">%&gt;%</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_group =</span> age_groups) <span class="sc">%&gt;%</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>  <span class="fu">group_by</span>(age_group) <span class="sc">%&gt;%</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_sum =</span> <span class="fu">sum</span>(total))</span></code></pre></div>
+<p>Finally, we can plot the output.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">ggplot</span>(female_groups, <span class="fu">aes</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="at">x =</span> age_group,</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="at">y =</span> total_sum</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>)) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;#f04a4c&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Female population counts in Colombia by age group for 2034&quot;</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Age group&quot;</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Female population&quot;</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;white&quot;</span>),</span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="at">colour =</span> <span class="st">&quot;white&quot;</span>),</span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
