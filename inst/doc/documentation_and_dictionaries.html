@@ -49,7 +49,7 @@ overflow: visible;
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -60,7 +60,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
 { counter-reset: source-line 0; }
@@ -412,96 +412,6 @@ information required to use the related functions is the area of
 interest, dates, and tags be consulted. Individual tags are required to
 download data and include:</p>
 </div>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Tags</th>
-<th align="left">Variable</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">TSSM_CON</td>
-<td align="left">Dry-bulb Temperature</td>
-</tr>
-<tr class="even">
-<td align="left">THSM_CON</td>
-<td align="left">Wet-bulb Temperature</td>
-</tr>
-<tr class="odd">
-<td align="left">TMN_CON</td>
-<td align="left">Minimum Temperature</td>
-</tr>
-<tr class="even">
-<td align="left">TMX_CON</td>
-<td align="left">Maximum Temperature</td>
-</tr>
-<tr class="odd">
-<td align="left">TSTG_CON</td>
-<td align="left">Dry-bulb Temperature (Termograph)</td>
-</tr>
-<tr class="even">
-<td align="left">HR_CAL</td>
-<td align="left">Relative Humidity</td>
-</tr>
-<tr class="odd">
-<td align="left">HRHG_CON</td>
-<td align="left">Relative Humidity (Hydrograph)</td>
-</tr>
-<tr class="even">
-<td align="left">TV_CAL</td>
-<td align="left">Vapour Pressure</td>
-</tr>
-<tr class="odd">
-<td align="left">TPR_CAL</td>
-<td align="left">Dew Point</td>
-</tr>
-<tr class="even">
-<td align="left">PTPM_CON</td>
-<td align="left">Precipitation (Daily)</td>
-</tr>
-<tr class="odd">
-<td align="left">PTPG_CON</td>
-<td align="left">Precipitation (Hourly)</td>
-</tr>
-<tr class="even">
-<td align="left">EVTE_CON</td>
-<td align="left">Evaporation</td>
-</tr>
-<tr class="odd">
-<td align="left">FA_CON</td>
-<td align="left">Atmospheric Phenomenon</td>
-</tr>
-<tr class="even">
-<td align="left">NB_CON</td>
-<td align="left">Cloudiness</td>
-</tr>
-<tr class="odd">
-<td align="left">RCAM_CON</td>
-<td align="left">Wind Trajectory</td>
-</tr>
-<tr class="even">
-<td align="left">BSHG_CON</td>
-<td align="left">Sunshine Duration</td>
-</tr>
-<tr class="odd">
-<td align="left">VVAG_CON</td>
-<td align="left">Wind Speed</td>
-</tr>
-<tr class="even">
-<td align="left">DVAG_CON</td>
-<td align="left">Wind Direction</td>
-</tr>
-<tr class="odd">
-<td align="left">VVMXAG_CON</td>
-<td align="left">Maximum Wind Speed</td>
-</tr>
-<tr class="even">
-<td align="left">DVMXAG_CON</td>
-<td align="left">Maximum Wind Direction</td>
-</tr>
-</tbody>
-</table>
 <div style="text-align: justify;">
 <p>These tags are meant to be used for download using
 <code>download_climate()</code>, <code>download_climate_geom()</code>
@@ -537,29 +447,11 @@ but can be <code>&quot;EN&quot;</code> as well.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(ColOpenData)</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>datasets <span class="ot">&lt;-</span> <span class="fu">list_datasets</span>(<span class="at">language =</span> <span class="st">&quot;EN&quot;</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">head</span>(datasets)</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 7</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co">#&gt;   name                 group      source year  level        category description</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;      </span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt; 1 DANE_MGN_2018_DPTO   geospatial DANE   2018  department   maps     Geographic…</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt; 2 DANE_MGN_2018_MPIO   geospatial DANE   2018  municipality maps     Geographic…</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; 3 DANE_MGN_2018_MPIOCL geospatial DANE   2018  municipalit… maps     Geographic…</span></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; 4 DANE_MGN_2018_SETU   geospatial DANE   2018  urban_sector maps     Geographic…</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; 5 DANE_MGN_2018_SETR   geospatial DANE   2018  rural_sector maps     Geographic…</span></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; 6 DANE_MGN_2018_SECU   geospatial DANE   2018  urban_secti… maps     Geographic…</span></span></code></pre></div>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">head</span>(datasets)</span></code></pre></div>
 <p>To list only demographic datasets we can use:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>demographic_datasets <span class="ot">&lt;-</span> <span class="fu">list_datasets</span>(<span class="at">module =</span> <span class="st">&quot;demographic&quot;</span>, <span class="at">language =</span> <span class="st">&quot;EN&quot;</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">head</span>(demographic_datasets)</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 7</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt;   name                group       source year  level        category description</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;               &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;      </span></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; 1 DANE_CNPVH_2018_1HD demographic DANE   2018  department   househo… Number of …</span></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; 2 DANE_CNPVH_2018_1HM demographic DANE   2018  municipality househo… Number of …</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; 3 DANE_CNPVH_2018_2HD demographic DANE   2018  department   househo… Number of …</span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt; 4 DANE_CNPVH_2018_2HM demographic DANE   2018  municipality househo… Number of …</span></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt; 5 DANE_CNPVH_2018_3HD demographic DANE   2018  department   househo… Households…</span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt; 6 DANE_CNPVH_2018_3HM demographic DANE   2018  municipality househo… Households…</span></span></code></pre></div>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">head</span>(demographic_datasets)</span></code></pre></div>
 <div style="text-align: justify;">
 <p>We highly recommend using <code>View()</code> instead of
 <code>head()</code> in the local environment for a cleaner and easier
@@ -591,16 +483,7 @@ searching for a single word, you can use either <code>&quot;and&quot;</code>or
 </div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>age_datasets <span class="ot">&lt;-</span> <span class="fu">look_up</span>(<span class="at">keywords =</span> <span class="st">&quot;age&quot;</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="fu">head</span>(age_datasets)</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 7</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt;   name                 group       source year  level       category description</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;      </span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; 1 DANE_CNPVH_2018_1HD  demographic DANE   2018  department  househo… Number of …</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; 2 DANE_CNPVH_2018_1HM  demographic DANE   2018  municipali… househo… Number of …</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; 3 DANE_CNPVH_2018_2HD  demographic DANE   2018  department  househo… Number of …</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; 4 DANE_CNPVH_2018_2HM  demographic DANE   2018  municipali… househo… Number of …</span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; 5 DANE_CNPVPD_2018_1PD demographic DANE   2018  department  persons… Total cens…</span></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; 6 DANE_CNPVPD_2018_1PM demographic DANE   2018  municipali… persons… Total cens…</span></span></code></pre></div>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="fu">head</span>(age_datasets)</span></code></pre></div>
 <p>We can specify a module to make a more narrow and precise search.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>area_sex_datasets <span class="ot">&lt;-</span> <span class="fu">look_up</span>(</span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="at">keywords =</span> <span class="fu">c</span>(<span class="st">&quot;area&quot;</span>, <span class="st">&quot;sex&quot;</span>),</span>
@@ -609,16 +492,7 @@ searching for a single word, you can use either <code>&quot;and&quot;</code>or
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="at">language =</span> <span class="st">&quot;EN&quot;</span></span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>)</span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="fu">head</span>(area_sex_datasets)</span>
-<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 7</span></span>
-<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="co">#&gt;   name                 group       source year  level       category description</span></span>
-<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;      </span></span>
-<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co">#&gt; 1 DANE_CNPVPD_2018_1PD demographic DANE   2018  department  persons… Total cens…</span></span>
-<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a><span class="co">#&gt; 2 DANE_CNPVPD_2018_1PM demographic DANE   2018  municipali… persons… Total cens…</span></span>
-<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="co">#&gt; 3 DANE_CNPVPD_2018_3PD demographic DANE   2018  department  persons… Total cens…</span></span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co">#&gt; 4 DANE_CNPVPD_2018_3PM demographic DANE   2018  municipali… persons… Total cens…</span></span>
-<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a><span class="co">#&gt; 5 DANE_CNPVPD_2018_4PD demographic DANE   2018  department  persons… Census pop…</span></span>
-<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a><span class="co">#&gt; 6 DANE_CNPVPD_2018_4PM demographic DANE   2018  municipali… persons… Census pop…</span></span></code></pre></div>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="fu">head</span>(area_sex_datasets)</span></code></pre></div>
 </div>
 <div id="geospatial-dictionaries" class="section level2">
 <h2>Geospatial dictionaries</h2>
@@ -635,16 +509,7 @@ language as parameters:</p>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="at">language =</span> <span class="st">&quot;EN&quot;</span></span>
 <span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>)</span>
 <span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="fu">head</span>(dict_mpio)</span>
-<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 4</span></span>
-<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co">#&gt;   variable                 type         length description                      </span></span>
-<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                    &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;                            </span></span>
-<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co">#&gt; 1 codigo_departamento      Text              2 Department code                  </span></span>
-<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="co">#&gt; 2 codigo_municipio_sin_con Text              3 Municipality code                </span></span>
-<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="co">#&gt; 3 municipio                Text            250 Municipality name                </span></span>
-<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="co">#&gt; 4 codigo_municipio         Text              5 Concatenated municipality code   </span></span>
-<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">#&gt; 5 version                  Long Integer     NA Year of the geographic informati…</span></span>
-<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">#&gt; 6 area                     Double           NA Municipality area in square mete…</span></span></code></pre></div>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="fu">head</span>(dict_mpio)</span></code></pre></div>
 </div>
 <div id="climate-tags" class="section level2">
 <h2>Climate tags</h2>
@@ -657,16 +522,7 @@ tags language, that can be <code>&quot;EN&quot;</code> or <code>&quot;ES&quot;</
 </div>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>dict_climate <span class="ot">&lt;-</span> <span class="fu">get_climate_tags</span>(<span class="at">language =</span> <span class="st">&quot;EN&quot;</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="fu">head</span>(dict_climate)</span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 3</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="co">#&gt;   tag      variable                          frequency                          </span></span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;                             &lt;chr&gt;                              </span></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt; 1 TSSM_CON Dry-bulb Temperature              Hourly (07:00, 13:00, 18:00 and/or…</span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#&gt; 2 THSM_CON Wet-bulb Temperature              Hourly (07:00, 13:00, 18:00 and/or…</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a><span class="co">#&gt; 3 TMN_CON  Minimum Temperature               Daily                              </span></span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="co">#&gt; 4 TMX_CON  Maximum Temperature               Daily                              </span></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a><span class="co">#&gt; 5 TSTG_CON Dry-bulb Temperature (Termograph) Hourly (24 hours)                  </span></span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co">#&gt; 6 HR_CAL   Relative Humidity                 Hourly (07:00, 13:00, 18:00 and/or…</span></span></code></pre></div>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="fu">head</span>(dict_climate)</span></code></pre></div>
 </div>
 <div id="divipola" class="section level2">
 <h2>DIVIPOLA</h2>
@@ -681,16 +537,7 @@ each municipality and department can be consulted using the
 <code>divipola_table()</code> function.</p>
 </div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>divipola <span class="ot">&lt;-</span> <span class="fu">divipola_table</span>()</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">head</span>(divipola)</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 5</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#&gt;   codigo_departamento codigo_municipio departamento municipio  tipo     </span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;               &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;    </span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#&gt; 1 05                  05001            Antioquia    Medellín   Municipio</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; 2 05                  05002            Antioquia    Abejorral  Municipio</span></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co">#&gt; 3 05                  05004            Antioquia    Abriaquí   Municipio</span></span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="co">#&gt; 4 05                  05021            Antioquia    Alejandría Municipio</span></span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co">#&gt; 5 05                  05030            Antioquia    Amagá      Municipio</span></span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co">#&gt; 6 05                  05031            Antioquia    Amalfi     Municipio</span></span></code></pre></div>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">head</span>(divipola)</span></code></pre></div>
 <div style="text-align: justify;">
 <p>To get the DIVIPOLA code of a municipality or department we can use
 the auxiliary functions <code>divipola_municipality_code()</code> and
@@ -698,8 +545,7 @@ the auxiliary functions <code>divipola_municipality_code()</code> and
 To retrieve a department code we only have to include the department’s
 name:</p>
 </div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">name_to_code_dep</span>(<span class="at">department_name =</span> <span class="st">&quot;Guajira&quot;</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co">#&gt; [1] &quot;44&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">name_to_code_dep</span>(<span class="at">department_name =</span> <span class="st">&quot;Guajira&quot;</span>)</span></code></pre></div>
 <div style="text-align: justify;">
 <p>To retrieve a municipality code we must include the department name
 and the municipality name. This is to consider repetition among
@@ -708,8 +554,7 @@ municipalities’ names across departments.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">name_to_code_mun</span>(</span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>  <span class="at">department_name =</span> <span class="st">&quot;Boyacá&quot;</span>,</span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  <span class="at">municipality_name =</span> <span class="st">&quot;Tunja&quot;</span></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>)</span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt; [1] &quot;15001&quot;</span></span></code></pre></div>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>)</span></code></pre></div>
 <div style="text-align: justify;">
 <p>These individual codes can be used to filter information in the
 datasets.</p>
@@ -718,8 +563,7 @@ translated to retrieve their official names using
 <code>divipola_municipality_name()</code> and
 <code>divipola_department_name()</code>.</p>
 </div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">code_to_name_mun</span>(<span class="at">municipality_code =</span> <span class="st">&quot;15001&quot;</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Tunja&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">code_to_name_mun</span>(<span class="at">municipality_code =</span> <span class="st">&quot;15001&quot;</span>)</span></code></pre></div>
 </div>
 
 

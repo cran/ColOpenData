@@ -1,6 +1,6 @@
 Package: ColOpenData
 Title: Download Colombian Demographic, Climate and Geospatial Data
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: c(
     person("Maria Camila", "Tavera-Cifuentes", , "mc.tavera@uniandes.edu.co", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0007-1610-4583")),
@@ -45,7 +45,7 @@ Language: en-US
 LazyData: true
 RoxygenNote: 7.3.2
 NeedsCompilation: no
-Packaged: 2024-09-17 14:08:10 UTC; Camila
+Packaged: 2024-10-30 23:13:38 UTC; Camila
 Author: Maria Camila Tavera-Cifuentes [aut, cre, cph]
     (<https://orcid.org/0009-0007-1610-4583>),
   Julian Otero [aut, cph] (<https://orcid.org/0009-0006-0429-7747>),
@@ -58,4 +58,4 @@ Author: Maria Camila Tavera-Cifuentes [aut, cre, cph]
   Joshua W. Lambert [rev] (<https://orcid.org/0000-0001-5218-3046>)
 Maintainer: Maria Camila Tavera-Cifuentes <mc.tavera@uniandes.edu.co>
 Repository: CRAN
-Date/Publication: 2024-09-17 16:30:14 UTC
+Date/Publication: 2024-10-30 23:30:11 UTC

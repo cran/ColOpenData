@@ -49,7 +49,7 @@ overflow: visible;
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -60,7 +60,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
 { counter-reset: source-line 0; }
@@ -379,39 +379,15 @@ then filter the level by the desired SAL.</p>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>department_datasets <span class="ot">&lt;-</span> datasets_dem[datasets_dem[<span class="st">&quot;level&quot;</span>] <span class="sc">==</span> <span class="st">&quot;department&quot;</span>, ]</span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fu">head</span>(department_datasets)</span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 7</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="co">#&gt;   name                 group       source year  level      category  description</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;      </span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="co">#&gt; 1 DANE_CNPVH_2018_1HD  demographic DANE   2018  department househol… Number of …</span></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co">#&gt; 2 DANE_CNPVH_2018_2HD  demographic DANE   2018  department househol… Number of …</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="co">#&gt; 3 DANE_CNPVH_2018_3HD  demographic DANE   2018  department househol… Households…</span></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="co">#&gt; 4 DANE_CNPVPD_2018_1PD demographic DANE   2018  department persons_… Total cens…</span></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co">#&gt; 5 DANE_CNPVPD_2018_3PD demographic DANE   2018  department persons_… Total cens…</span></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="co">#&gt; 6 DANE_CNPVPD_2018_4PD demographic DANE   2018  department persons_… Census pop…</span></span></code></pre></div>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fu">head</span>(department_datasets)</span></code></pre></div>
 <div style="text-align: justify;">
 <p>After reviewing the available datasets, we can select the one we wish
 to work with and take a closer look. For instance, let’s suppose we
 choose the dataset <u>“DANE_CNPVPD_2018_14BPD”</u>.</p>
 </div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>chosen_dataset <span class="ot">&lt;-</span> <span class="fu">download_demographic</span>(<span class="st">&quot;DANE_CNPVPD_2018_14BPD&quot;</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#&gt; Original data is retrieved from the National Administrative Department</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt; of Statistics (Departamento Administrativo Nacional de Estadística -</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt; DANE).</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; Reformatted by package authors.</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; Stored by Universidad de Los Andes under the Epiverse TRACE iniative.</span></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="fu">head</span>(chosen_dataset)</span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 7</span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co">#&gt;   codigo_departamento departamento sexo  grupo_de_edad area </span></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;               &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;         &lt;chr&gt;</span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">#&gt; 1 total               Nacional     total total         total</span></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co">#&gt; 2 total               Nacional     total total         total</span></span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a><span class="co">#&gt; 3 total               Nacional     total total         total</span></span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="co">#&gt; 4 total               Nacional     total total         total</span></span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="co">#&gt; 5 total               Nacional     total total         total</span></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="co">#&gt; 6 total               Nacional     total total         total</span></span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a><span class="co">#&gt; # ℹ 2 more variables: servicio_salud_al_que_acudieron &lt;chr&gt;, total &lt;int&gt;</span></span></code></pre></div>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">head</span>(chosen_dataset)</span></code></pre></div>
 <div style="text-align: justify;">
 <p><code>chosen_data</code> presents information regarding health
 service attended by people that in the last thirty days had an illness,
@@ -427,29 +403,8 @@ use <code>simplified = FALSE</code>.</p>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  <span class="at">demographic_dataset =</span></span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>    <span class="st">&quot;DANE_CNPVPD_2018_14BPD&quot;</span></span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>)</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; Original data is retrieved from the National Administrative Department</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt; of Statistics (Departamento Administrativo Nacional de Estadística -</span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; DANE).</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; Reformatted by package authors.</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; Stored by Universidad de Los Andes under the Epiverse TRACE iniative.</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="fu">head</span>(merged_data)</span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; # A tibble: 6 × 18</span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt;   codigo_departamento departamento version         area latitud longitud</span></span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;               &lt;chr&gt;          &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;</span></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; 1 05                  Antioquia       2018 62804708983.    6.92    -75.6</span></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt; 2 08                  Atlántico       2018  3315752105.   10.7     -75.0</span></span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt; 3 11                  Bogotá, D.C.    2018  1622852605.    4.32    -74.2</span></span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt; 4 13                  Bolívar         2018 26719196397.    8.75    -74.5</span></span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt; 5 15                  Boyacá          2018 23138048132     5.78    -73.1</span></span>
-<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="co">#&gt; 6 17                  Caldas          2018  7425221672.    5.34    -75.3</span></span>
-<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="co">#&gt; # ℹ 12 more variables: total_personas_que_tuvieron_alguna_enfermedad &lt;int&gt;,</span></span>
-<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a><span class="co">#&gt; #   sin_informacion &lt;int&gt;,</span></span>
-<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a><span class="co">#&gt; #   a_la_entidad_de_seguridad_social_en_salud_a_la_cual_esta_afliado_a &lt;int&gt;,</span></span>
-<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a><span class="co">#&gt; #   a_un_medico_particular &lt;int&gt;, a_un_boticario_farmaceuta_droguista &lt;int&gt;,</span></span>
-<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a><span class="co">#&gt; #   a_terapias_alternativas &lt;int&gt;,</span></span>
-<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a><span class="co">#&gt; #   acudio_a_una_autoridad_indigena_espiritual &lt;int&gt;,</span></span>
-<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a><span class="co">#&gt; #   otro_medico_de_un_grupo_etnico &lt;int&gt;, uso_remedios_caseros &lt;int&gt;, …</span></span></code></pre></div>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="fu">head</span>(merged_data)</span></code></pre></div>
 <div style="text-align: justify;">
 <p><code>merged_data</code> presents geospatial information related to
 departments, as well as the information related to the health service
@@ -483,7 +438,6 @@ experiencing a health problem in each department.</p>
 <span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="st">    a health problem&quot;</span>,</span>
 <span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">&quot;Colombia&quot;</span></span>
 <span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAACYVBMVEUAAAAAADoAAGYAOjoAOmYAOpAAZpAAZrYQvtIbvtEhv9Ajv9Arv88xwM02wMw2wcw5wcw6AAA6ADo6AGY6OgA6OmY6OpA6ZmY6ZpA6ZrY6kLY6kNs6wcs/wspDwslHw8dLw8ZOxMVQxMRRxMRUxcNXxcFaxsBcxr9dxr9fx75ix71jyLxkyLtlyLtmAABmADpmAGZmOgBmOmZmOpBmkJBmkLZmkNtmtpBmtrZmtttmtv9nyLpoyblpybhpyblryrdsyrduyrZuyrdvy7Vyy7RzzLN0zLJ1zLF4zbB5za97zq19zqx9zq1/z6p/z6uB0KqC0KmE0aeF0aaH0qWJ0qOJ0qSK06KM06GM1KCO1KCP1J6QOgCQOjqQZgCQZjqQZmaQkGaQkLaQtpCQttuQ1Z2Q27aQ29uQ2/+S1pyT1pqV15mW15iY2JaZ2JWa2ZSc2pKd2pGe25Cf24+h3I2i3Iyj3Yql3omm3oin34ao34Wp4ISq4IOr4IKr4YGs4YGt4n+u4n6v43yw43uy5Hqz5Hi05Xa15nW2ZgC2kDq2tpC2ttu229u22/+25nO2/7a2/9u2//+353K453C56G+66G276Wy96mi96mq/62W/62fA7GPC7WDC7WHE7l7F7l3F71vH8FfH8FnI8VXK8VPK8lHL80/M803N9EvO9EjP9UfQ9kTR9kLS9z/T9z3U+DvV+TXV+TfW+jLX+i7Y+yvZ/Cfa/CPbkDrbkGbbtmbbtpDb27bb29vb/R/b/7bb/9vb///c/Rnc/hLd/wne/wD/tmb/25D/27b/29v//7b//9v///901+HFAAAACXBIWXMAAA7DAAAOwwHHb6hkAAATIElEQVR4nO2diX/eNhnHnbYjJUDZ223dRjhHoS2lGR0w1kBDw1GOUo5AySAMxgYEyk04W8oN2ViAcoz7vu+brAO2cLzvSPRXoVuy9MiyZclxWv32WerXkmXpm+d5ZD9W/BYoq1LFZneg78qAPMqAPMqAPMqAPMqAPMqAPMqAPCouW6sq3lioLq+j0Q3ngXbHw84Zo0MVIv0qn6IDQKvbMqBKNQVUqQ4AlUUBPXC4KK5a0XuwWkzS2vjTfYeLsRtJCam1Y0W1tFpsW5GHrk9NDgfFjkW9Iq0zNigK0pg6xwVc7y7REXY62q+N1xfF2BG2C/9/55X8vLj+2NO1+laHRoPJCwO8C3fgmjVUHo7VUXdl0S/WJbGfABqRMRRji6zFVbKxXIzTtjYWdhwmhdOItKjV2ljYPsDHykPXp64e8GJZkdahx09q51glGzsOW4A2Fgp2Jgao4J9Y/aKQ9e0OjQbk3GO3DVi1UWVHnZVlv2iX5P6CdIb83u4d8C6MBtN4uAX2i+HYIu4orn1PQft/hLTCLRx/pDYmDsVHjK9t3FGqyOpQF9Mrjt2OHlgoLECjwbWkX+MC0PgabgSob3cID+YIusB+DdZwzI66KqvzsPOL/bT9SYRUqFifwq3svhXDWyYVyV66i51xmf9mWIE6dH2Kklvedl5VZHVow6oi2xoNAEDbn3aX2KXOOyyM+naH6BbtADnUGI7ZUVdl1a/yfgxoyGxYGiXmMtz2xalpHFZK/Z8mhUMJiBSoQ0mXmX+qijygkq6qikPiHSoYajFomVS4ZkXEIL6bejxUX52HjoZ1YNkajtlRV2XVL3KE2g8AwqdcxtF5nPSgS0DoXhJdtp3vHSB+JqnR4KaFSbR62R00dqj+GC5GCtShzMWIPesuJgGpisx4OU9EnVL7+PdbiukyIMvF7A6Vx2wMx+yoq7LqF3MxsZ8F6dvxtLYgLldw3N+9iH8zV44bk0w5SLMCcSgO0o+wgzQDRCc0VRGHvw0ZdLFj3cg+DnEDaOMOxlWd1xnU9SCtj9kYjtlRV2XVLx6k+X4yYG5PkwL6akF/58TmNA8wp3k6eHno+tT2AXWQ0jTPAJFydY5haZpXH/nMzuBo5zWnebtD5TEbwzE76qysdUTfTy1ihJ1/+xFplcNiXER/PUSMyheKzJTEofiU5NJrBWkVeZ31w2TKVufAoWbHl9QV6z34sPvlheK1a0aQZheKz5iyAcnzGGMuD8fsqLuy6Bd3Sr4/1t28CipJRGbUzVHvAY0GD8JGtVxM+6smUe8BydCUpnmveg9IhqZNUs4oepQBedQSUHX+iiUObjjvqaZJeWrizFhtpQe0ui0Dqiy95ABduLLgKU9kZ0B58pJXwaX3k1l6Uq+G9PysnhDdsSIuyNVluCtR2p0aA+K3Rvy6TcuAGslLnjwVgGQ1IpWf5QlReVvFb+nEjZwrUdqhmgLCt2grpeyDyoCKJKWqormYqEZVys/ShKi4MdeTAnris5wojUrAo4AY9I873zBQN9cqA6plOnkVDVAp66PysyIhKlI7Kq1kJkT1RGn7YddXY0DM6u3sg5bIk1WMIC3Tgir9WEpnDQmgSa3ElQeMMvKaagoI+8DVb/z8fXb2Qc++iiqXIiA2FjADOm1VcQPSHansYuNIdzE4UdpqxA3VHND4Gpl8jczreCmpKaowQDK3qAHSQ7ERpCeRHqTBRGlUAh41n8UKPf2gZ0BFklJVYYDYdVAZkMjPioSo8YBWlLgSpR2qcZCml3S3LxspcZEBpclLWYWWkozr/VYM4vlZPSG6Qz7i3yNLXInS7rQpd/OJ87NRlQF5lAF5lAF5lDOKHmVAHmVAHmVAHmVAHmVAHmVAHmVAHsGAVrWlUkSj3YtgPbHfVX4RCAIkFturFSc+QBexIEA8obCq8goZkK71KWU6JPk1zkDITfJwapIk5qfJgnOaOyPlo4G+zvGiEQBIMwuWSyUr7xfl5oBmCVmyma3mp+UUK/SHPVtcEKAr5CiHdNUqBrF7UW4OpnleHu+U/+5e/B/xx4vQ5aotaEjTnhSAtsmrkA9X0OeB0/Tz0Jj6Lg5VxKD16xcbAFqfIo8MLwkLEtMXDij0LzO4i6lNDZD6lwIcXhIWpF0HQUG6BEgF6SF95nxpAGJ/mcT/ysae5ksWdKvciY8Ze/PUZi1nTqZ8L+ZRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRBuRRHwDNz89vdhfc6gGgearN7oVLmw1onvPJgByan8+AqtR3PBmQV5sKqO9wiDYPUO9th2mzAPXft7g2CdCW4bM5gOTcngHpOiA2thKfDgEdINLpbAU83QPaanwyIJ/SA9q1i7HhLoa2xvWhVGpAu3YZgE6dQh3wMd+MYOmBlYpCXR0DOkAAJU+R2W9GMFX/b0fTApqFAFEbSnpa+80IpnoCaJYCQoaLnSJpspRyvBmB/YkkeS3CNHkJQs13IKQGhJ0MKTqIGVBiwW9GkH9kS9+I0BcLoohK7sWU8qyONyOYb0Ko2VhyQLOo5F6dAALfjGD/W0sdAEK2AaUFBL8ZobeAZgFAKU+KHG9G6CMgVLYg1BUg+80I7CtRxySg9dp/4J8S0OWUEAKCUMKTMplvRqBvN7rpevXmkeW6X8+RHpCK0opQwpPGVmJA7FqofBm0pfikBYRFbjdErmwL2k96QNSKUMcRKKaSA7pcOtlWdLBkgHZiCROS9xtoC/JJBGjnTkYIsSjEJ3t5q3o8yUnTKCUgbkTyphWxZMfx45c8oJ07AUIEETWg41Qpzsv1X1hhjaUApOERMxm/K0OdAPoPrLDGEgO6vARothtA/4YV1lh0QBMTRgjiE5m0oOPJAf0LVlhjsQFNYGkmZFmQMKCUhP4JK6yxyIAmKCDNhBAL0xqg9Cb0N1hhjSWxID0K7ZR39eUYlBDRX2GFNRYP0BL9WeYjzGi2U0B/gRXWWEQLooRKIYgDmp3VAJ1KD+jPsMIaiwmIEDIMiBfps5gClIrQn2CFNRY/Bpl8qNMJQCVCkU8t9QdYYY0lBjTBBAKKfGalP8IKayxqkJ4wroIEnzKg5DHo97DCGosIaMkCNCEBydtV1MEs9jtYYY1FA7S0tFSa5Mk+G9AMTwYldbHfwgprLBagpaUlNotpgCYMD5tFMzOYECI/UgL6DaywxuIAWhKShDQ8xID4I8QZoaQm9GtYYY1FAbS0VCZENDFRJmQASknoV7DCGosBaElXmUwpCCk+M0mzQr+EFdZYbAtaQiAh9oR1ZqbsY4kA/QKWKF6fKuTiRbrWamOhYkVs9BgEW9AEor5nmlCUk1v6OSxeurEwjVb5yoUh+V5ytDzNFlqBiguIQHABIv/rJkQn/BMn0FewEPkPkc0YvfkZLF66/pTzYpHe8thteIPscCvSNF/lXorRTEmI8qGADMXo0U916QWjPWtk7Rn/gAGN9tyS3MXEdVATPjMYD8ynLaGfwOKlxJvKgAbTlBqsmFfSVYCQxScdoB/D4qWABWk7LMW8F6twMdt8EAME8mlJ6IeweKkWgxig9ad2BshNCADkjECtCf0IFi/dWJiUsxgjtdyJizUENFPNpxWhH8ASxew6iBkR/4K0wv3Vg1FjkBOQzWemzIc2ged6vtGO0PdhhTUWF9AS/1AjQlNASHI4e/asvgESqrsA4XuwwsYVGRB8P0YrqOjM+ZxgB561pQBxJs2WaHwHVti44sYgx/0YxiEAIZo0o3wwIQAOJ0QUuoblu7DChpUEkGlC3Fz45MUuoekuN6A2a3y+DStsWFGfizkAiQocEMdTAajlGqhvwgobVUJAiOeouVjIwVhOSDkIOfnUBPQtWGGjSuRiAg3+cfDgQXTyJNK4VANCbj41AX0dVtiwksxifLbHZCgfBojO62U8AB9ynJNPTUDfgBU2rjTTPLoOMdNhfDCgk6KeBqiRd9Xng+6GFTauFIAwHw6I0kEUEEFEfkjrge0nAh/0NVhh40pjQdcRQoLPMcbnJKfErac5n9qAvgorbFzpXEzgOVYCxEyocXRuBCjq7W+iIM1cjOKBAMHxpxpPfUBfhhU2rpSzGAIAIacF+eynPqAvwAobV4rrIPqRhqESIDGZhfKpDehzsMKGlQAQQnv3IkaI8RGTmPzXAkT3RQP0WVhhw0oEaC/bpxkQ+XhSbpl45ubm4gH6DKywYcUHRPnsRYcOHQIAMUhIJ4QonpiAPg0rbFgJAXE+eghCHNCcIESuh+bmIgP6FKywYUUHxPhgFzvE+RzTQhAmwwARQvy4ueiAPgkrbFjRp3nGhwYhzodIAaKak/8qxQP0CVii2FrdQd7K4HxTRcxlwDohJPhwRNzDGIoSmPiAPg6Ll1qrO8hDQ/fLTuKuk9ZdTAHiVoRgMPUB1SX0MVi81FrdMSS0ll0mFBEQn9uFix3TAdFJrAqPB1Dz3nxUl15gPZsn6uLR817JhlmQCagaTzWgZj05A4uXWqs7EHsc7VBUF9MBHTtmuFgoINryPqZ63fgILF4KWBB5u5BLMQG5DQj5+ViA9Jb3NQL0YVi81FrdQRcIOZUKUGM+BiCt2X266vTjQ7B4qbW6o5JP3CANGxAp8/MpAaLt7YNUpyMfhCWKzdUd5L2v7guhiEHaNiC6n/yswUcDRI4C6dQE9AFYYcOKBkizHgFIFJ1uDsjFpxah98MKG1dUQIhO9kSMz2ks8rMZoCo8tSxoCVbYuOJeSdNnT+QRFAV0mquZi6GW9oPQ+2CFDSkSIO3p3N0moHp8NEAt+aD3wgobWRxA8EPMBnxwJQmoLR/0HlhhQ0sDiBCS9oPciIxmKqb3BnzQu2GFDS0RIIxI8CF3QW48N6ObhVhTLQM00btghQ0tCiBwqQAHdMYFCB93s6FKPPUZvRNW2NhaAtq/H+2H+SDNgGxA5FgTDzEhH6BahN4BK2yE7QDtJwIAkTLJB7AggE49C6pF6O2wwobYCtB+ByBy8awcTLcgcSTIJxah07DCxtgG0H4FCJUuhdQMBgJy0FGBuhKTv19vgxU2yBiA6DYy3UsakO5iVXDqTGWkzNuvt8IKG2QEQPvpFlLupUy6OaBqRyNn9QN6E6ywQUaIQYKSxUfLBjezIBCNcC4/oNfCChtjQkB6vrwOINbm0aMQoEbdeg2ssDHGA2S4WOnhAqnsAYQIGyZGCAUDmocVNsZgQCQ2ly0I8Tt5mgGyHr4gtsbFj4cSqpQP16thhY0zHJAhRJmJaQx6NkX3OwEdLSm0V1SvghXWWLiLmYRUHLrb+ezujPMS+mhEQK+EFdZYixgEAUIsoeji4yJk8vEA8vgYnDswcys1FeM6SAN07hyqMiAHIcuA2gF6BSxRrJa/8K3RIN0f9Vp8KKAKPphQDQNq52Ivh8VL1fIXvkWeQ7u/zK5tPsjk47UgZkL02GAL8uhlsHipevTMt+jDeucLTlonzCxAiM1j1YRIuSRk82kHiOqluvQCtXiBb6W1II0QA3SO7DvnCUOsmBMC+LTj9BJYvFQtfxFb+po8S3Fy0gzQOU10t5uQFo4q+AQCejEsXmpZEFl+N3RG6VSAOKSqYERNCQjQkk4ooBfB4qVWDCqtqLIU68kqwIci8hJyAGrTlxfC4qVq+Qvf6sKCKCCQUDUggigyHawXwBLFavkLDz7Dqq89jgdImpBOCvlsCCTUsi/PhxXWWMzFC1p4bmdDLfvxPFhhjaX6+qzaYQgi1PLcz4UV1liy7xcrTfg+Qgajlqd+DqywxtJ9AVv9uYxliuIBejassMaSfs8qZlN3sqeKBOhZsMIaS/tFtEQ8bLshyevqWICeCSussfSAEMuCVNx4nIkM6MmwwhrrCpDD0Wix/iEGoCfBCmusE0AiEYKAZx0mrqMo+B5M6ACssMY6AoS4j9FtFx8Bqa0RBa96gNQVoJIfsR363hKhtm72RFhhjXUOSNgNoojAoN0W0BNghTXWGSDvHUc8C9oLK6yx3gJqQejxsMIa6yMgRBmFn+lxsMIa6w4QqsuIVw4n9FhYYY11CqguoTPaZBegx8AKa6xbQKihp4Xp0bDCGustoBaIHgUrrLGLEdAjYYU11jmg+oSCz/BwWKLYWt3BljE4dDECehgsXmqt7sBa7ebtL/WkEkCpAD0UFi+1nqwiNLrqcI8AESXlw/QQXXqB9WwebbzuLX1yMaK0gB4Mi5faqztWJ3sVg4g6sCCn7NUde9b6DciBK9W5rRjEXk3hev/L5gOSn01uiWSt7kA9m+apLAxnjP3pANmrO/oIiAmCkB5QM20qIFi94tNHQCgD8ioD8igDqlZ2MY96xKePgHoVozMgn/oHqF+XQRmQT70D1DM+GZBPfQPUrztVlAF51TdARBmQTxmQRz3i009AfVIG5FEG5FEG5FEG5FEG5FEG5FEG5FEG5FEG5FEG5FEG5FEG5FEG5FEG5FEG5FEG5FEG5FEG5FEG5FEG5FEG5NH/AWOALZyL9JT1AAAAAElFTkSuQmCC" /><!-- --></p>
 </div>
 </div>
 
