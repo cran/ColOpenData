@@ -1,6 +1,6 @@
 Package: ColOpenData
 Title: Download Colombian Demographic, Climate and Geospatial Data
-Version: 0.3.1
+Version: 1.0.0
 Authors@R: c(
     person("Maria Camila", "Tavera-Cifuentes", , "mc.tavera@uniandes.edu.co", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0009-0007-1610-4583")),
@@ -23,11 +23,11 @@ Authors@R: c(
   )
 Description: Downloads wrangled Colombian socioeconomic, geospatial,population 
     and climate data from DANE <https://www.dane.gov.co/> (National 
-    Administrative Department of Statistics)  and IDEAM <https://ideam.gov.co> 
-    (Institute of Hydrology, Meteorology and Environmental Studies). It solves 
-    the problem of Colombian data being issued in different web pages and sources by
-    using functions that allow the user to select the desired database and
-    download it without having to do the exhausting acquisition process.
+    Administrative Department of Statistics) and IDEAM (Institute of Hydrology,
+    Meteorology and Environmental Studies). It solves the problem of Colombian 
+    data being issued in different web pages and sources by using functions that
+    allow the user to select the desired database and download it without having
+    to do the exhausting acquisition process.
 License: MIT + file LICENSE
 URL: https://github.com/epiverse-trace/ColOpenData,
         https://epiverse-trace.github.io/ColOpenData/
@@ -45,7 +45,7 @@ Language: en-US
 LazyData: true
 RoxygenNote: 7.3.2
 NeedsCompilation: no
-Packaged: 2024-10-30 23:13:38 UTC; Camila
+Packaged: 2025-03-06 14:25:15 UTC; Camila
 Author: Maria Camila Tavera-Cifuentes [aut, cre, cph]
     (<https://orcid.org/0009-0007-1610-4583>),
   Julian Otero [aut, cph] (<https://orcid.org/0009-0006-0429-7747>),
@@ -58,4 +58,4 @@ Author: Maria Camila Tavera-Cifuentes [aut, cre, cph]
   Joshua W. Lambert [rev] (<https://orcid.org/0000-0001-5218-3046>)
 Maintainer: Maria Camila Tavera-Cifuentes <mc.tavera@uniandes.edu.co>
 Repository: CRAN
-Date/Publication: 2024-10-30 23:30:11 UTC
+Date/Publication: 2025-03-06 14:40:06 UTC
